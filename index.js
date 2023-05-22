@@ -4,19 +4,19 @@ import path from "path";
 import cors from "cors";
 import './src/database'
 
-    const app = express();
-    app.set('port',process.env.PORT || 4000);
+import routerGastos from "./src/routes/gastos.routes";
 
-    app.listen(app.get('port'),()=>{
-        console.log(`listening on port ${app.get('port')}`);
-    })
+const app = express();
+app.set('port',process.env.PORT || 4000);
 
-    app.use(morgan('dev'));
-    app.use(cors());
-    app.use(express.json());
-    app.use(express.urlencoded({extended:true}));
-    app.use(express.static('./public'))
+app.listen(app.get('port'),()=>{
+    console.log(`listening on port ${app.get('port')}`);
+})
 
-    app.get("/", (req,res)=>{
-        res.send('primera peticion get');
-    })
+app.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static('./public'))
+
+app.use('/administrar', routerGastos);
