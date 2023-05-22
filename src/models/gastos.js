@@ -17,6 +17,12 @@ const gastosSchema = new Schema({
         minlength: 2,
         maxlength: 60,
     },
+    local:{
+        type:String,
+        required: false,
+        minlength: 4,
+        maxlength: 60
+    },
     precio:{
         type: Number,
         required: true,

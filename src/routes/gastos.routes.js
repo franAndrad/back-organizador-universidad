@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { listarGastos } from "../controllers/gastos.controllers";
+import { listarGastos,crearGasto,obtenerGasto,editarGasto,borrarGasto} from "../controllers/gastos.controllers";
 
 const router = Router();
 
 router.route('/gastos')
     .get(listarGastos)
-    // .post(crearGasto);
+    .post(crearGasto);
 
-// router.route('/gastos/:id')
-//     .get(obtenerPedido)
-//     .put(editarPedido)
-//     .delete(borrarPedido);
+router.route('/gastos/:id')
+    .get(obtenerGasto)
+    .put(editarGasto)
+    .delete(borrarGasto);
 
 export default router;
