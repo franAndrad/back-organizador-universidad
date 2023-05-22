@@ -1,5 +1,6 @@
 import { check } from "express-validator";
 import resultadosValidacion from "./resultadoValidacion";
+import moment from "moment";
 
 const validarGasto = [
   check("usuario")
@@ -21,6 +22,11 @@ const validarGasto = [
             );
         }
     }),
+    check('producto')
+        .notEmpty()
+        .withMessage('El producto es obligatorio')
+        .isLength({min:2, max:60})
+        .withMessage('El producto debe tener entre 2 y 50 caracteres'),
     check("local")
         .isLength({ min: 4, max: 60 }),
     check("precio")
