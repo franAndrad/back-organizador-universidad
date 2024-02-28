@@ -1,5 +1,21 @@
+import fs from "fs";
+import path from "path";
 import { validationResult } from "express-validator";
-import Materia from "../models/materia";
+import Materia from "../models/Materia";
+
+// Ruta al archivo JSON de materias
+const dataFilePath = path.join(__dirname, ".", "data", "materias.json");
+
+// Función para leer los datos del archivo JSON
+const leerDatosMaterias = () => {
+  try {
+    const data = fs.readFileSync(dataFilePath, "utf8");
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("Error al leer el archivo de datos de materias:", error);
+    return [];
+  }
+};
 
 export const listarMaterias = async (req, res) => {
   try {
@@ -23,17 +39,28 @@ export const crearMateria = async (req, res) => {
         errores: errores.array(),
       });
     }
-    const nuevaMateria = new Materia(req.body);
-    await nuevaMateria.save();
+
+    // Modificar el email y userId de cada elemento del archivo JSON
+    let materias = leerDatosMaterias().map((materia) => {
+      return Object.assign({}, materia, {
+        email: req.body.email,
+        userId: req.body.userId,
+      });
+    });
+
+    // Guardar todas las materias en la base de datos
+    await Materia.insertMany(materias);
+
     res.status(200).json({
-      mensaje: "La materia se creó correctamente",
+      mensaje: "Las materias se crearon correctamente",
     });
   } catch (error) {
     res.status(400).json({
-      mensaje: "La materia no se pudo crear",
+      mensaje: "Las materias no se pudieron crear",
     });
   }
 };
+
 
 export const obtenerMateria = async (req, res) => {
   try {

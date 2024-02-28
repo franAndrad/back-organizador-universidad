@@ -57,7 +57,7 @@ router
 router
   .route("/materias")
   .get(listarMaterias)
-  .post(validarMateria, crearMateria);
+  .post(crearMateria);
 
 router
   .route("/materia/:id")
