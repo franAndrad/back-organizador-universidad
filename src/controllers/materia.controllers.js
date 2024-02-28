@@ -353,6 +353,14 @@ export const listarMaterias = async (req, res) => {
 
 export const crearMateria = async (req, res) => {
   try {
+    // Verificar si hay errores de validación en la solicitud
+    const errores = validationResult(req);
+    if (!errores.isEmpty()) {
+      return res.status(400).json({
+        errores: errores.array(),
+      });
+    }
+
     // Crear un array para almacenar las nuevas materias
     const nuevasMaterias = [];
 
@@ -363,9 +371,11 @@ export const crearMateria = async (req, res) => {
         abreviacion: materiaData.abreviacion,
         numero: materiaData.numero,
         modalidad: materiaData.modalidad,
-        regular: [],
-        aprobada: [],
+        regular: materiaData.regular,
+        aprobada: materiaData.aprobada,
         nota: 0, // Establecer la nota en 0
+        email: req.body.email,
+        userId: req.body.userId,
       });
 
       // Guardar la nueva materia en el array
@@ -384,6 +394,8 @@ export const crearMateria = async (req, res) => {
     });
   }
 };
+
+
 
 export const obtenerMateria = async (req, res) => {
   try {
