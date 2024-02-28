@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "/",
-            "dest":"/"
+            "dest":"@vercel/node"
         }
     ],
     "routes":[
