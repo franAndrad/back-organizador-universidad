@@ -1,28 +1,9 @@
-import fs from "fs";
-import path from "path";
 import { validationResult } from "express-validator";
-import Materia from "../models/Materia";
-
-// Ruta al archivo JSON de materias
-const dataFilePath = path.join(__dirname, ".", "data", "materias.json");
-
-// Función para leer los datos del archivo JSON
-const leerDatosMaterias = () => {
-  try {
-    const data = fs.readFileSync(dataFilePath, "utf8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error al leer el archivo de datos de materias:", error);
-    return [];
-  }
-};
+import Materia from "../models/materia";
 
 export const listarMaterias = async (req, res) => {
   try {
-    const materias = await Materia.find({
-      email: req.query.email,
-      userId: req.query.userId,
-    });
+    const materias = await Materia.find();
     res.status(200).json(materias);
   } catch (error) {
     res.status(404).json({
@@ -39,28 +20,17 @@ export const crearMateria = async (req, res) => {
         errores: errores.array(),
       });
     }
-
-    // Modificar el email y userId de cada elemento del archivo JSON
-    let materias = leerDatosMaterias().map((materia) => {
-      return Object.assign({}, materia, {
-        email: req.body.email,
-        userId: req.body.userId,
-      });
-    });
-
-    // Guardar todas las materias en la base de datos
-    await Materia.insertMany(materias);
-
+    const nuevaMateria = new Materia(req.body);
+    await nuevaMateria.save();
     res.status(200).json({
-      mensaje: "Las materias se crearon correctamente",
+      mensaje: "La materia se creó correctamente",
     });
   } catch (error) {
     res.status(400).json({
-      mensaje: "Las materias no se pudieron crear",
+      mensaje: "La materia no se pudo crear",
     });
   }
 };
-
 
 export const obtenerMateria = async (req, res) => {
   try {
