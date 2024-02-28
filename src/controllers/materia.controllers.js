@@ -387,10 +387,12 @@ export const crearMateria = async (req, res) => {
 
     res.status(200).json({
       mensaje: "Las materias se crearon correctamente",
+      success: true,
     });
   } catch (error) {
     res.status(400).json({
       mensaje: "Las materias no se pudieron crear",
+      success: false,
     });
   }
 };
