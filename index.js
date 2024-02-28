@@ -4,7 +4,7 @@ import path from "path";
 import cors from "cors";
 import './src/database'
 
-import routerGastos from "./src/routes/gastos.routes";
+import routerDatos from "./src/routes/datos.routes";
 
 const app = express();
 app.set('port',process.env.PORT || 4000);
@@ -19,4 +19,4 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('./public'))
 
-app.use('/administrar', routerGastos);
+app.use('/', routerDatos);
