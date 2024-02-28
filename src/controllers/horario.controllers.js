@@ -3,7 +3,7 @@ import Horario from "../models/horario";
 
 export const listarHorarios = async (req, res) => {
   try {
-    const horarios = await Horario.find();
+    const horarios = await Horario.find({ email: req.query.email, userId: req.query.userId});
     res.status(200).json(horarios);
   } catch (error) {
     res.status(404).json({

@@ -4,6 +4,14 @@ const { Schema } = mongoose;
 
 // Define el esquema para los parciales
 const parcialSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
   fecha: {
     type: String,
     required: true,

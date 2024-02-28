@@ -3,7 +3,10 @@ import Parcial from "../models/parcial";
 
 export const listarParciales = async (req, res) => {
   try {
-    const parciales = await Parcial.find();
+    const parciales = await Parcial.find({
+      email: req.query.email,
+      userId: req.query.userId,
+    });
     res.status(200).json(parciales);
   } catch (error) {
     res.status(404).json({

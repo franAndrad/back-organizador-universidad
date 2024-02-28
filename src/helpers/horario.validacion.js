@@ -4,6 +4,12 @@ import moment from "moment";
 import Horario from "../models/horario"
 
 const validarHorario = [
+  check("email")
+    .notEmpty()
+    .withMessage("El correo electrónico es obligatorio")
+    .isEmail()
+    .withMessage("El correo electrónico debe ser válido"),
+  check("userID").notEmpty().withMessage("El userID es obligatorio"),
   check("dia")
     .notEmpty()
     .withMessage("El día es obligatorio")

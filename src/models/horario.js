@@ -22,6 +22,14 @@ const materiaSchema = new Schema({
 
 // Define el esquema para el día
 const diaSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
   dia: {
     type: String,
     required: true,

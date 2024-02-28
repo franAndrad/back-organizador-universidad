@@ -3,7 +3,10 @@ import Materia from "../models/materia";
 
 export const listarMaterias = async (req, res) => {
   try {
-    const materias = await Materia.find();
+    const materias = await Materia.find({
+      email: req.query.email,
+      userId: req.query.userId,
+    });
     res.status(200).json(materias);
   } catch (error) {
     res.status(404).json({

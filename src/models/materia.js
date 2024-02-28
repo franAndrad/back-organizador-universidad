@@ -4,6 +4,14 @@ const { Schema } = mongoose;
 
 // Define el esquema para las materias
 const materiaSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
   nombre: {
     type: String,
     required: true,

@@ -2,6 +2,12 @@ import { check } from "express-validator";
 import resultadosValidacion from "./resultadoValidacion";
 
 const validarMateria = [
+  check("email")
+    .notEmpty()
+    .withMessage("El correo electrónico es obligatorio")
+    .isEmail()
+    .withMessage("El correo electrónico debe ser válido"),
+  check("userID").notEmpty().withMessage("El userID es obligatorio"),
   check("nombre")
     .notEmpty()
     .withMessage("El nombre de la materia es obligatorio"),
