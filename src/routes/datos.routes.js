@@ -36,7 +36,7 @@ router
   .post(validarHorario, crearHorario);
 
 router
-  .route("/horarios/:id")
+  .route("/horario/:id")
   .get(obtenerHorario)
   .put(editarHorario)
   .delete(borrarHorario);
@@ -48,7 +48,7 @@ router
   .post(validarParcial, crearParcial);
 
 router
-  .route("/parciales/:id")
+  .route("/parcial/:id")
   .get(obtenerParcial)
   .put(editarParcial)
   .delete(borrarParcial);
