@@ -4,12 +4,6 @@ import moment from "moment";
 import Horario from "../models/horario"
 
 const validarHorario = [
-  check("email")
-    .notEmpty()
-    .withMessage("El correo electrónico es obligatorio")
-    .isEmail()
-    .withMessage("El correo electrónico debe ser válido"),
-  check("userID").notEmpty().withMessage("El userID es obligatorio"),
   check("dia")
     .notEmpty()
     .withMessage("El día es obligatorio")
@@ -28,23 +22,7 @@ const validarHorario = [
 ,
   check("materias")
     .isArray({ min: 0 })
-    .withMessage("Las materias deben ser un arreglo")
-    .custom((materias) => {
-      if (materias.length === 0) return true;
-      for (let materia of materias) {
-        if (
-          !materia.nombre ||
-          !materia.abreviacion ||
-          !materia.curso ||
-          !materia.horario
-        ) {
-          throw new Error(
-            "Cada materia debe tener nombre, abreviación, curso y horario"
-          );
-        }
-      }
-      return true;
-    }),
+    .withMessage("Las materias deben ser un arreglo"),
   (req, res, next) => {
     resultadosValidacion(req, res, next);
   },

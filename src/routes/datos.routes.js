@@ -33,7 +33,7 @@ const router = Router();
 router
   .route("/horarios")
   .get(listarHorarios)
-  .post(crearHorario);
+  .post(validarHorario, crearHorario);
 
 router
   .route("/horario/:id")
