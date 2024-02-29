@@ -24,15 +24,7 @@ const validarHorario = [
     ])
     .withMessage(
       "El día debe ser uno de los siguientes: DOMINGO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO"
-    )
-    .custom(async (dia) => {
-      // Verifica si el día ya existe en la base de datos
-      const existeDia = await Horario.exists({ dia });
-      if (existeDia) {
-        throw new Error("El día ya existe en la base de datos");
-      }
-      return true;
-    }),
+    ),
   check("materias")
     .isArray({ min: 0 })
     .withMessage("Las materias deben ser un arreglo")
