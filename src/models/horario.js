@@ -4,7 +4,7 @@ import mongoose, { Schema } from "mongoose";
 const materiaSchema = new Schema({
   nombre: {
     type: String,
-    required: true,
+    required: false,
   },
   abreviacion: {
     type: String,
