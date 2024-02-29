@@ -24,6 +24,7 @@ const validarHorario = [
     ])
     .withMessage(
       "El día debe ser uno de los siguientes: DOMINGO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO"
+    )
 ,
   check("materias")
     .isArray({ min: 0 })
